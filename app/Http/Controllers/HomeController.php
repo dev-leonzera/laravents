@@ -25,8 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $eventos = Evento::all()->count();
-        $inscritos = Inscrito::all()->count();
-        return view('home', compact('eventos', 'inscritos'));
+        $eventos = Evento::count();
+        $inscritos = Inscrito::count();
+        $proximoEvento = Evento::where('data_inicio', '>=', now())
+                               ->orderBy('data_inicio', 'asc')
+                               ->first();
+
+        return view('home', compact('eventos', 'inscritos', 'proximoEvento'));
     }
 }

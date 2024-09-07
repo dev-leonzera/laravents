@@ -14,32 +14,66 @@
                 <div class="row">
                     <div class="col">
                         <div class="mb-3">
-                            Local do evento: {{ $evento->local }}
+                            <b>Local do evento:</b> {{ $evento->local }}
                         </div>
                         <div class="mb-3">
                             @if ($evento->data_fim)
-                                Data do Evento: {{ \date("d/m/Y", strtotime($evento->data_inicio)) }} à {{ \date("d/m/Y", strtotime($evento->data_fim)) }}
+                                <b>Data do Evento:</b> {{ \date("d/m/Y", strtotime($evento->data_inicio)) }} à {{ \date("d/m/Y", strtotime($evento->data_fim)) }}
                             @else
-                                Data do Evento: {{ \date("d/m/Y", strtotime($evento->data_inicio)) }};
+                                <b>Data do Evento:</b> {{ \date("d/m/Y", strtotime($evento->data_inicio)) }};
                             @endif
                         </div>
                     </div>
                     <div class="col">
-                        <div class="mb-3">
+                        <div class="mb-3 d-flex justify-content-end">
                             <a href="{{ url('/evento/'.$evento->slug) }}" target="_blank" class="btn btn-primary">Link para a página do evento</a>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <h3>Descrição do Evento</h3>
+                            <p>{{ $evento->description }}</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
                 <div>
+                    <h2>Lista de Inscritos</h2>
+                    <form action="{{ route('eventos.show', $evento->id) }}" method="GET" class="mb-3">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <select name="status" class="form-control">
+                                    <option value="">Todos os status</option>
+                                    <option value="Aprovado" {{ request('status') == 'Aprovado' ? 'selected' : '' }}>Aprovado</option>
+                                    <option value="Rejeitado" {{ request('status') == 'Rejeitado' ? 'selected' : '' }}>Rejeitado</option>
+                                    <option value="Pendente" {{ request('status') == 'Pendente' ? 'selected' : '' }}>Pendente</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select name="tipo_inscricao" class="form-control">
+                                    <option value="">Todos os tipos</option>
+                                    @foreach($tiposInscricao as $tipo)
+                                        <option value="{{ $tipo->nome }}" {{ request('tipo_inscricao') == $tipo->nome ? 'selected' : '' }}>{{ $tipo->nome }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary">Filtrar</button>
+                                <a href="{{ route('inscritos.export', ['evento_id' => $evento->id] + request()->all()) }}" class="btn btn-success">Exportar</a>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table">
-                        <h2>Lista de Inscritos</h2>
                         <thead>
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Idade</th>
                             <th>Telefone</th>
-                            {{-- <th>Status Inscrição</th>
-                            <th>Ações</th> --}}
+                            <th>Tipo de Inscrição</th>
+                            <th>Status Inscrição</th>
+                            <th>Ações</th>
                         </thead>
                         <tbody>
                             @foreach ($inscritos as $inscrito)
@@ -55,17 +89,20 @@
                                 </td>
                                 <td>
                                     @php
-                                        $mask = '(##) ####-####';
+                                        $mask = '(##) #####-####';
                                     @endphp
                                     {{ mask($mask, $inscrito->telefone) }}
                                 </td>
-                                {{-- <td>
-                                    Aprovada
+                                <td>
+                                    {{ $inscrito->tipoInscricao->nome }}
                                 </td>
                                 <td>
-                                    <button>Aprovar</button>
-                                    <button>Negar</button>
-                                </td> --}}
+                                    {{ $inscrito->status }}
+                                </td>
+                                <td>
+                                    <button class="btn btn-info">Aprovar</button>
+                                    <button class="btn btn-danger">Rejeitar</button>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
