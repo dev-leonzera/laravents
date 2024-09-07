@@ -45,8 +45,8 @@
 
             <div class="col-lg-12">
                 <div>
-                    <label class="form-label">Descrição do Evento</label>
-                    <textarea class="form-control" name="description" rows="3">{{ $evento->description }}</textarea>
+                    <label class="form-label">Descrição do Evento</label>                    
+                    <textarea class="form-control" name="description" id="description" rows="3">{{ $evento->description }}</textarea>
                 </div>
             </div>
             <div class="form-footer">
@@ -55,5 +55,14 @@
         </div>
     </form>
 </div>
-
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+@endpush
 @endsection
