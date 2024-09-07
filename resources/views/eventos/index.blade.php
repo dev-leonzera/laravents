@@ -42,7 +42,7 @@
                         cellspacing="0">
                         <thead>
                             <tr>
-                                <th>{{ __('Nome do evento') }}</th>
+                                <th>{{ __('Nome do eventos') }}</th>
                                 <th>{{ __('Data de Início') }}</th>
                                 <th>{{ __('Data de Encerramento') }}</th>
                                 <th>{{ __('Local') }}</th>
