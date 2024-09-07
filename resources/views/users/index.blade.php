@@ -14,8 +14,8 @@
                     </div>
                     <!-- Page title actions -->
                     <div class="col-auto ms-auto d-print-none">
-                        {{-- <div class="btn-list">
-                            <a href="{{ route('register') }}" class="btn btn-success d-none d-sm-inline-block" data-bs-toggle="modal"
+                        <div class="btn-list">
+                            <a href="#" class="btn btn-success d-none d-sm-inline-block" data-bs-toggle="modal"
                                 data-bs-target="#modal-create">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -27,7 +27,7 @@
                                 </svg>
                                 Criar novo usuário
                             </a>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,8 +43,6 @@
                             <tr>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Email Address') }}</th>
-                                <th>{{ __('Created at') }}</th>
-                                <th>{{ __('Updated in') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,8 +50,6 @@
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->created_at }}</td>
-                                    <td>{{ $user->updated_at->diffForhumans() }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -67,14 +63,14 @@
             </div>
         </div>
     </div>
-    {{-- <div class="modal modal-blur fade" id="modal-create" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal modal-blur fade" id="modal-create" tabindex="-1" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ __('Novo Usuário') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form class="card card-md" action="{{ route('register') }}" method="post" autocomplete="off">
+                <form class="card card-md" action="{{ route('users.create') }}" method="post" autocomplete="off">
                     @csrf
 
                     <div class="card-body">
@@ -101,13 +97,13 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label">{{ __('Repeat Password') }}</label>
                             <input type="password" name="password_confirmation" class="form-control form-control-user @error('password_confirmation') is-invalid @enderror" placeholder="{{ __('Repeat Password') }}">
                             @error('password_confirmation')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary w-100">{{ __('Create new account') }}</button>
@@ -116,5 +112,5 @@
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection

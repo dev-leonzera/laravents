@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\TipoInscricao;
+use App\Models\Inscrito;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -30,20 +32,36 @@ class EventosController extends Controller
         $evento->description = $request->input('description');
         $evento->capacidade = $request->input('capacidade');
         $evento->slug = Str::slug($request->input('title'));
-        $evento->banner = 'banner'.'_'.$evento->slug.'.'.$request->file('image')->extension();
+        $evento->banner = 'banner' . '_' . $evento->slug . '.' . $request->file('image')->extension();
         $request->file('image')->move(public_path('/img'), $evento->banner);
         $evento->save();
+
 
         return redirect()->route('eventos.index')
             ->with('success', 'Evento criado com sucesso!');
     }
 
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $evento = Evento::findOrFail($id);
-        $inscritos = $evento->inscrito()->orderBy('nome')->get();
-        return view('eventos.show')->with('evento', $evento)->with('inscritos', $inscritos);
+        $tiposInscricao = TipoInscricao::all();
+
+        $query = Inscrito::where('evento_id', $id);
+
+        if ($request->has('status') && $request->status != '') {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->has('tipo_inscricao') && $request->tipo_inscricao != '') {
+            $query->whereHas('tipoInscricao', function ($q) use ($request) {
+                $q->where('nome', $request->tipo_inscricao);
+            });
+        }
+
+        $inscritos = $query->get();
+
+        return view('eventos.show', compact('evento', 'inscritos', 'tiposInscricao'));
     }
 
     /**
@@ -76,8 +94,8 @@ class EventosController extends Controller
         $evento->description = $request->input('description');
         $evento->capacidade = $request->input('capacidade');
         $evento->slug = Str::slug($request->input('title'));
-        if($request->file('image')){
-            $evento->banner = 'banner'.'_'.$evento->slug.'.'.$request->file('image')->extension();
+        if ($request->file('image')) {
+            $evento->banner = 'banner' . '_' . $evento->slug . '.' . $request->file('image')->extension();
             $request->file('image')->move(public_path('/img'), $evento->banner);
         }
 
@@ -100,6 +118,6 @@ class EventosController extends Controller
         $evento->delete();
 
         return redirect()->route('eventos.index')
-                     ->with('success', 'Evento excluído com sucesso!');
+            ->with('success', 'Evento excluído com sucesso!');
     }
 }
