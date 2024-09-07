@@ -34,7 +34,7 @@
                     <div class="col">
                         <div class="mb-3">
                             <h3>Descrição do Evento</h3>
-                            <p>{{ $evento->description }}</p>
+                            <p>{!! $evento->description !!}</p>
                         </div>
                     </div>
                 </div>
