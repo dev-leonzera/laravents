@@ -44,7 +44,7 @@
                             <tr>
                                 <th>{{ __('Nome do evento') }}</th>
                                 <th>{{ __('Data de Início') }}</th>
-                                <th>{{ __('Data de Encerramentos') }}</th>
+                                <th>{{ __('Data de Encerramento') }}</th>
                                 <th>{{ __('Local') }}</th>
                                 <th>{{ __('') }}</th>
                             </tr>
