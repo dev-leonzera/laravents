@@ -36,6 +36,26 @@
                     {!! $evento->description !!}
                 </div>
             </div>
+
+            <div class="row">
+                <h3>Kits de inscrição</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($tiposInscricao as $tipo)
+                        <tr>
+                            <td>{{ $tipo->nome }}</td>
+                            <td>R$ {{ number_format($tipo->valor, 2, ',', '.') }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div class="row">

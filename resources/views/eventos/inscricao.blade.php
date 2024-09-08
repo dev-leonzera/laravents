@@ -10,7 +10,7 @@
         <div class="card-body">
             <input type="hidden" name="evento_id" value="{{ $evento->id }}">
             
-            @foreach(['nome' => 'Nome completo', 'idade' => 'Idade', 'telefone' => 'Telefone', 'email' => 'Email', 'congregacao' => 'Congregação'] as $field => $label)
+            @foreach(['nome' => 'Nome completo', 'idade' => 'Idade', 'telefone' => 'Telefone/Whatsapp', 'email' => 'Email', 'congregacao' => 'Congregação'] as $field => $label)
                 <div class="mb-3">
                     <label class="form-label">{{ __($label) }}</label>
                     <input type="{{ $field == 'email' ? 'email' : ($field == 'idade' ? 'number' : 'text') }}"
@@ -26,7 +26,7 @@
             @endforeach
 
             <div class="mb-3">
-                <label class="form-label">{{ __('Tipo de Inscrição') }}</label>
+                <label class="form-label">{{ __('Kits de inscrição') }}</label>
                 <select name="tipos_inscricao_id" class="form-select @error('tipos_inscricao_id') is-invalid @enderror" required>
                     <option value="">Selecione o tipo de inscrição</option>
                     @foreach($tipos_inscricao as $tipo)

@@ -16,7 +16,8 @@ class InscritoController extends Controller
     {
         $evento = Evento::where('slug', $slug)->firstOrFail();
         $qnt_inscritos = $evento->inscrito()->count();
-        return view('eventos.evento', compact('evento', 'qnt_inscritos'));
+        $tiposInscricao = TipoInscricao::all();
+        return view('eventos.evento', compact('evento', 'qnt_inscritos', 'tiposInscricao'));
     }
 
     public function pageForm($id)
