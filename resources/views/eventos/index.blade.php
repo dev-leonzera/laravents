@@ -159,9 +159,23 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#description'))
+            .then(editor => {
+                editor.model.document.on('change:data', () => {
+                    document.querySelector('#description').value = editor.getData();
+                });
+            })
             .catch(error => {
                 console.error(error);
             });
+    </script>
+@endpush
+@push('scripts')
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Formulário enviado');
+            this.submit();
+        });
     </script>
 @endpush
 @endsection
