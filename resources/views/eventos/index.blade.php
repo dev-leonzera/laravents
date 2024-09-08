@@ -133,10 +133,6 @@
                         <input name="data_fim" type="date" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Capacidade Máxima</label>
-                        <input type="number" name="capacidade" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label">Banner</label>
                         <input type="file" name="image" class="form-control" required>
                     </div>

@@ -30,7 +30,6 @@ class EventosController extends Controller
         $evento->data_inicio = $request->input('data_inicio');
         $evento->data_fim = $request->input('data_fim');
         $evento->description = $request->input('description');
-        $evento->capacidade = $request->input('capacidade');
         $evento->slug = Str::slug($request->input('title'));
         $evento->banner = 'banner' . '_' . $evento->slug . '.' . $request->file('image')->extension();
         $request->file('image')->move(public_path('/img'), $evento->banner);
@@ -92,7 +91,6 @@ class EventosController extends Controller
         $evento->data_inicio = $request->input('data_inicio');
         $evento->data_fim = $request->input('data_fim');
         $evento->description = $request->input('description');
-        $evento->capacidade = $request->input('capacidade');
         $evento->slug = Str::slug($request->input('title'));
         if ($request->file('image')) {
             $evento->banner = 'banner' . '_' . $evento->slug . '.' . $request->file('image')->extension();
