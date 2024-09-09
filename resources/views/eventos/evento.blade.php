@@ -36,35 +36,36 @@
                     {!! $evento->description !!}
                 </div>
             </div>
-
             <div class="row">
-                <h3>Kits de inscrição</h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Tipo</th>
-                            <th>Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($tiposInscricao as $tipo)
-                        <tr>
-                            <td>{{ $tipo->nome }}</td>
-                            <td>R$ {{ number_format($tipo->valor, 2, ',', '.') }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="col">
+                    <h3>Kits de inscrição</h3>
+                    <table class="table">
+                        <tbody>
+                            @foreach ($tiposInscricao as $tipo)
+                            <tr>
+                                <td>{{ $tipo->nome }}</td>
+                                <td>R$ {{ number_format($tipo->valor, 2, ',', '.') }}</td>
+                                <td><b>{{ $tipo->temVagasDisponiveis() ? 'Vagas disponíveis' : 'Vagas esgotadas' }}</b></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col d-flex justify-content-center">
-            @if ($qnt_inscritos === $evento->capacidade)
-            <a href="#" class="btn btn-secondary disabled">Inscrições Encerradas</a>
+            @php
+                $inscricoesDisponiveis = $tiposInscricao->some(function($tipo) {
+                return $tipo->temVagasDisponiveis();
+                });
+            @endphp
+
+            @if ($inscricoesDisponiveis)
+                <a href="{{ url('/evento/' . $evento->id . '/inscricao') }}" class="btn btn-success btn-pill w-50">Faça sua inscrição</a>
             @else
-            <a href="{{ url('/evento/' . $evento->id . '/inscricao') }}" class="btn btn-success btn-pill w-25 ">Faça
-                sua inscrição</a>
+                <a href="#" class="btn btn-secondary disabled">Inscrições Encerradas</a>
             @endif
         </div>
     </div>

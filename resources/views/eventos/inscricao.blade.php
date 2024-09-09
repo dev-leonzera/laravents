@@ -30,9 +30,11 @@
                 <select name="tipos_inscricao_id" class="form-select @error('tipos_inscricao_id') is-invalid @enderror" required>
                     <option value="">Selecione o tipo de inscrição</option>
                     @foreach($tipos_inscricao as $tipo)
-                        <option value="{{ $tipo->id }}" {{ old('tipos_inscricao_id') == $tipo->id ? 'selected' : '' }}>
-                            {{ $tipo->nome }}
-                        </option>
+                        @if ($tipo->temVagasDisponiveis())
+                            <option value="{{ $tipo->id }}" {{ old('tipos_inscricao_id') == $tipo->id ? 'selected' : '' }}>
+                                {{ $tipo->nome }} - R$ {{ number_format($tipo->valor, 2, ',', '.') }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
                 @error('tipos_inscricao_id')
