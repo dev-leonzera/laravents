@@ -10,7 +10,7 @@ class TipoInscricao extends Model
     use HasFactory;
     protected $table = 'tipos_inscricao';
 
-    protected $fillable = ['nome', 'numero_vagas', 'valor', 'descricao'];
+    protected $fillable = ['nome', 'numero_vagas', 'valor', 'descricao', 'link_pagamento'];
 
     public function temVagasDisponiveis()
     {
