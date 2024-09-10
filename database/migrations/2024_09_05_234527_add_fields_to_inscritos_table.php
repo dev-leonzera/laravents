@@ -18,6 +18,8 @@ class AddFieldsToInscritosTable extends Migration
             $table->foreign('tipos_inscricao_id')->references('id')->on('tipos_inscricao')->onDelete('set null');
             $table->string('congregacao')->nullable();
             $table->enum('status', ['pendente', 'aprovado', 'rejeitado'])->default('pendente');
+            $table->enum('camisa_tipo', ['masculino', 'baby-look']);
+            $table->enum('camisa_tamanho', ['PP', 'P', 'M', 'G', 'GG', 'XG']);
         });
     }
 

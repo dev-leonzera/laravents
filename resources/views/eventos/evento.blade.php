@@ -52,10 +52,15 @@
                     </table>
                 </div>
             </div>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <img src="{{ asset('img/img-tamanho-camisa.jpeg')}}" class="evento-banner"/>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
-        <div class="col d-flex justify-content-center">
+        <div class="col d-flex justify-content-center mt-5">
             @php
                 $inscricoesDisponiveis = $tiposInscricao->some(function($tipo) {
                 return $tipo->temVagasDisponiveis();

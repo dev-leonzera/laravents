@@ -9,7 +9,13 @@
     <title>{{ config('app.name', 'Laravents') }}</title>
     @vite('resources/sass/app.scss')
     @yield('custom_styles')
-
+    <style>
+        .evento-banner {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>

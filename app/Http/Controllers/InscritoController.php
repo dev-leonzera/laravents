@@ -23,7 +23,20 @@ class InscritoController extends Controller
     {
         $evento = Evento::findOrFail($id);
         $tipos_inscricao = TipoInscricao::all();
-        return view('eventos.inscricao', compact('evento', 'tipos_inscricao'));
+        $tipos_camisa = [
+            (object) ['id' => 1, 'nome' => 'Masculino', 'value' => 'masculino'],
+            (object) ['id' => 2, 'nome' => 'Baby Look', 'value' => 'baby look']
+        ];
+    
+        $tamanhos_camisa = [
+            (object) ['id' => 1, 'nome' => 'PP', 'value' => 'PP'],
+            (object) ['id' => 2, 'nome' => 'P', 'value' => 'P'],
+            (object) ['id' => 3, 'nome' => 'M', 'value' => 'M'],
+            (object) ['id' => 4, 'nome' => 'G', 'value' => 'G'],
+            (object) ['id' => 5, 'nome' => 'GG', 'value' => 'GG'],
+            (object) ['id' => 6, 'nome' => 'XG', 'value' => 'XG'],
+        ];
+        return view('eventos.inscricao', compact('evento', 'tipos_inscricao', 'tipos_camisa', 'tamanhos_camisa'));
     }
 
     public function formInscricao(Request $request)
@@ -36,6 +49,9 @@ class InscritoController extends Controller
                 'tipos_inscricao_id' => 'required|exists:tipos_inscricao,id',
                 'telefone' => 'required|string|max:255',
                 'idade' => 'required|integer',
+                'camisa_tipo' => 'required',
+                'camisa_tamanho' => 'required',
+
             ]);
 
             $inscrito = Inscrito::criarInscricao($validatedData);

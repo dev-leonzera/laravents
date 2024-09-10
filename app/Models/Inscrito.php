@@ -10,7 +10,7 @@ class Inscrito extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'email', 'telefone', 'idade', 'evento_id', 'tipos_inscricao_id', 'status', 'congregacao'];
+    protected $fillable = ['nome', 'email', 'telefone', 'idade', 'evento_id', 'tipos_inscricao_id', 'status', 'congregacao', 'camisa_tipo', 'camisa_tamanho'];
 
     public static function criarInscricao(array $dados)
     {

@@ -42,6 +42,36 @@
                 @enderror
             </div>
 
+            <div class="mb-3">
+                <label class="form-label">{{ __('Tipo de Camisa') }}</label>
+                <select name="camisa_tipo" class="form-select @error('camisa_tipo') is-invalid @enderror" required>
+                    <option value="">Selecione o tipo de camisa</option>
+                    @foreach($tipos_camisa as $tipo)
+                        <option value="{{ $tipo->value }}" {{ old('camisa_tipo') == $tipo->id ? 'selected' : '' }}>
+                            {{ $tipo->nome }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('camisa_tipo')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">{{ __('Tamanho de Camisa') }}</label>
+                <select name="camisa_tamanho" class="form-select @error('camisa_tamanho') is-invalid @enderror" required>
+                    <option value="">Selecione o tamanho de camisa</option>
+                    @foreach($tamanhos_camisa as $tamanho)
+                        <option value="{{ $tamanho->value }}" {{ old('camisa_tamanho') == $tamanho->id ? 'selected' : '' }}>
+                            {{ $tamanho->nome }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('camisa_tamanho')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="form-footer d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary">{{ __('Enviar inscrição') }}</button>
             </div>

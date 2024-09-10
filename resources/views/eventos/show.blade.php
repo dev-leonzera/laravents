@@ -73,6 +73,8 @@
                             <th>Telefone</th>
                             <th>Tipo de Inscrição</th>
                             <th>Status Inscrição</th>
+                            <th>Tipo Camisa</th>
+                            <th>Tamanho Camisa</th>
                             <th>Ações</th>
                         </thead>
                         <tbody>
@@ -98,6 +100,12 @@
                                 </td>
                                 <td>
                                     {{ $inscrito->status }}
+                                </td>
+                                <td>
+                                    {{ $inscrito->camisa_tipo }}
+                                </td>
+                                <td>
+                                    {{ $inscrito->camisa_tamanho }}
                                 </td>
                                 <td>
                                     <button class="btn btn-info">Aprovar</button>

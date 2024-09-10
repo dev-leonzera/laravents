@@ -46,7 +46,7 @@
             <div class="col-lg-12">
                 <div>
                     <label class="form-label">Descrição do Evento</label>                    
-                    <textarea class="form-control" name="description" id="description" rows="3">{{ $evento->description }}</textarea>
+                    <textarea class="form-control" name="description" id="description" rows="5">{{ $evento->description }}</textarea>
                 </div>
             </div>
             <div class="form-footer">
