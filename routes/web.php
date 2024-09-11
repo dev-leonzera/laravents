@@ -43,4 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('tipos_inscricao', TipoInscricaoController::class);
     Route::get('inscritos/export/{evento_id}', [InscritoController::class, 'export'])->name('inscritos.export');
     Route::get('inscritos/aprovar/{inscrito_id}', [InscritoController::class, 'approveRegistration'])->name('inscritos.aprovar');
+    Route::get('inscritos/rejeitar/{inscrito_id}', [InscritoController::class, 'rejectRegistration'])->name('inscritos.rejeitar');
+    
 });

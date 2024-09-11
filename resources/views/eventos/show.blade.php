@@ -79,41 +79,43 @@
                         </thead>
                         <tbody>
                             @foreach ($inscritos as $inscrito)
-                            <tr>
-                                <td>
-                                    {{ $inscrito->nome }}
-                                </td>
-                                <td>
-                                    {{ $inscrito->email }}
-                                </td>
-                                <td>
-                                    {{ $inscrito->idade }}
-                                </td>
-                                <td>
-                                    @php
-                                        $mask = '(##) #####-####';
-                                    @endphp
-                                    {{ mask($mask, $inscrito->telefone) }}
-                                </td>
-                                <td>
-                                    {{ $inscrito->tipoInscricao->nome }}
-                                </td>
-                                <td>
-                                    {{ $inscrito->status }}
-                                </td>
-                                <td>
-                                    {{ $inscrito->camisa_tipo }}
-                                </td>
-                                <td>
-                                    {{ $inscrito->camisa_tamanho }}
-                                </td>
-                                <td>
-                                    @if($inscrito->status !== "Aprovado")
-                                        <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
-                                        <button class="btn btn-danger">Rejeitar</button>
-                                    @endif
-                                </td>
-                            </tr>
+                            @if($inscrito->status !== "Rejeitado")
+                                <tr>
+                                    <td>
+                                        {{ $inscrito->nome }}
+                                    </td>
+                                    <td>
+                                        {{ $inscrito->email }}
+                                    </td>
+                                    <td>
+                                        {{ $inscrito->idade }}
+                                    </td>
+                                    <td>
+                                        @php
+                                            $mask = '(##) #####-####';
+                                        @endphp
+                                        {{ mask($mask, $inscrito->telefone) }}
+                                    </td>
+                                    <td>
+                                        {{ $inscrito->tipoInscricao->nome }}
+                                    </td>
+                                    <td>
+                                        {{ $inscrito->status }}
+                                    </td>
+                                    <td>
+                                        {{ $inscrito->camisa_tipo }}
+                                    </td>
+                                    <td>
+                                        {{ $inscrito->camisa_tamanho }}
+                                    </td>
+                                    <td>
+                                        @if($inscrito->status !== "Aprovado")
+                                            <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
+                                            <a href="{{ route('inscritos.rejeitar', $inscrito->id) }}" class="btn btn-danger">Rejeitar</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
