@@ -9,7 +9,7 @@
             <p>
                 Aguarde enquanto processamos sua inscrição. Em breve, você também receberá uma mensagem pelo Whatsapp com as instruções para pagamento.
             </p>
-            <a href="{{ $tipoInscricao->link_pagamento }}" class="btn btn-primary" target="_blank">Ir para pagamento</a>
+            <!-- <a href="{{ $tipoInscricao->link_pagamento }}" class="btn btn-primary" target="_blank">Ir para pagamento</a> -->
         </div>
     </div>
 </div>
