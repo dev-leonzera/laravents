@@ -42,4 +42,5 @@ Route::middleware('auth')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('tipos_inscricao', TipoInscricaoController::class);
     Route::get('inscritos/export/{evento_id}', [InscritoController::class, 'export'])->name('inscritos.export');
+    Route::get('inscritos/aprovar/{inscrito_id}', [InscritoController::class, 'approveRegistration'])->name('inscritos.aprovar');
 });

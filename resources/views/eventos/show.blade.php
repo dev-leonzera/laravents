@@ -108,8 +108,10 @@
                                     {{ $inscrito->camisa_tamanho }}
                                 </td>
                                 <td>
-                                    <button class="btn btn-info">Aprovar</button>
-                                    <button class="btn btn-danger">Rejeitar</button>
+                                    @if($inscrito->status !== "Aprovado")
+                                        <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
+                                        <button class="btn btn-danger">Rejeitar</button>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

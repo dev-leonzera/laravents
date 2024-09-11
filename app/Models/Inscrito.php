@@ -35,13 +35,13 @@ class Inscrito extends Model
 
     public function aprovar()
     {
-        $this->update(['status' => 'aprovada']);
+        $this->update(['status' => 'Aprovado']);
     }
 
     public function rejeitar()
     {
         DB::transaction(function () {
-            $this->update(['status' => 'rejeitada']);
+            $this->update(['status' => 'Rejeitado']);
             $this->tipoInscricao->incrementarVagas();
         });
     }
