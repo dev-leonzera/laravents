@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InscritosExport;
 use App\Mail\ConfirmarInscricao;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class InscritoController extends Controller
@@ -54,6 +55,7 @@ class InscritoController extends Controller
                 'email' => 'required|email|max:255',
                 'evento_id' => 'required|exists:eventos,id',
                 'tipos_inscricao_id' => 'required|exists:tipos_inscricao,id',
+                'congregacao' => 'required',
                 'telefone' => 'required|string|max:255',
                 'idade' => 'required|integer',
                 'camisa_tipo' => 'required',
@@ -99,6 +101,6 @@ class InscritoController extends Controller
     public function export(Request $request, $evento_id)
     {
         $filters = $request->only(['status', 'tipo_inscricao']);
-        return Excel::download(new InscritosExport($evento_id, $filters), 'inscritos.xlsx');
+        return Excel::download(new InscritosExport($evento_id, $filters), 'inscritos'.Carbon::now().'xlsx');
     }
 }
