@@ -101,6 +101,8 @@ class InscritoController extends Controller
     public function export(Request $request, $evento_id)
     {
         $filters = $request->only(['status', 'tipo_inscricao']);
-        return Excel::download(new InscritosExport($evento_id, $filters), 'inscritos'.Carbon::now().'xlsx');
+        $timestamp = Carbon::now()->format('YmdHis'); 
+        $filename = "inscritos_{$timestamp}.xlsx"; 
+        return Excel::download(new InscritosExport($evento_id, $filters), $filename);
     }
 }
