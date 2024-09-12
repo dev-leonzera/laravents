@@ -36,7 +36,9 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
             'Telefone',
             'Data de Inscrição',
             'Congregação',
-            'Status'
+            'Status',
+            'Link de pagamento',
+            'Link enviado'
         ];
     }
 
@@ -76,7 +78,9 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
                     $inscrito->telefone,
                     Carbon::parse($inscrito->created_at)->format('d/m/Y'),
                     $inscrito->congregacao,
-                    $inscrito->status
+                    $inscrito->status,
+                    "",
+                    ""
                 ];
             });
     }
