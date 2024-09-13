@@ -80,8 +80,6 @@
                             <th>Telefone</th>
                             <th>Tipo de Inscrição</th>
                             <th>Status Inscrição</th>
-                            <th>Tipo Camisa</th>
-                            <th>Tamanho Camisa</th>
                             <th>Mensagem Enviada</th>
                             <th>Ações</th>
                         </thead>
@@ -109,12 +107,6 @@
                                     </td>
                                     <td>
                                         {{ $inscrito->status }}
-                                    </td>
-                                    <td>
-                                        {{ $inscrito->camisa_tipo }}
-                                    </td>
-                                    <td>
-                                        {{ $inscrito->camisa_tamanho }}
                                     </td>
                                     <td>
                                         {{ $inscrito->mensagem_enviada ? "Sim" : "Não" }}
