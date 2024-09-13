@@ -46,14 +46,19 @@
                     <p>
                         <b>Tamanho da Camisa</b>: {{ $inscrito->camisa_tamanho }}
                     </p>
+                    @if($inscrito->link_pagamento !== "")
+                        <p>
+                            <b>Link de Pagamento</b>: {{ $inscrito->link_pagamento }}
+                        </p>
+                    @endif
                 </div>
             </div>
             <div class="row border mt-3 p-2 d-flex align-items-center">
-                <div class="col">
+                <div class="col-md-6 col-sm-12">
                     <form action="{{ route('inscritos.pagamento') }}" method="post">
                         @csrf
                         @method("PATCH")
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label for="link_pagamento">Inserir Link de Pagamento</label>
                             <input type="text" class="form-control my-2" id="link_pagamento" name="link_pagamento" />
                         </div>
@@ -61,7 +66,7 @@
                         <button type="submit" class="btn btn-primary">Salvar</button>
                     </form>
                 </div>
-                <div class="col d-flex justify-content-end">
+                <div class="col-md-6 col-sm-12 d-flex border p-2">
                     @if($inscrito->status !== "Aprovado")
                     <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
                     <a href="{{ route('inscritos.rejeitar', $inscrito->id) }}" class="btn btn-danger mx-2">Rejeitar</a>
