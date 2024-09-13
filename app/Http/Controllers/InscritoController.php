@@ -105,8 +105,9 @@ class InscritoController extends Controller
 
     public function showInscricao($id){
         $inscrito = Inscrito::find($id);
+        $evento = $inscrito->evento;
         $mensagem = $this->generateWhatsappUrl($id);
-        return view('eventos.show-inscricao', compact('inscrito', 'mensagem'));
+        return view('eventos.show-inscricao', compact('inscrito', 'mensagem', 'evento'));
     }
 
     public function generateWhatsappUrl($id)

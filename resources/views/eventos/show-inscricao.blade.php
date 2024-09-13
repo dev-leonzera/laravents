@@ -3,10 +3,13 @@
 
 <div class="container mt-5">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
             <h2>
                 Informações do Inscrito
             </h2>
+            <a href="{{ url('/eventos/' . $evento->id) }}" class="btn btn-primary">
+                Voltar para evento
+            </a>
         </div>
         <div class="card-body">
             <div class="row border p-2">
@@ -17,7 +20,7 @@
                     <p>
                         <b>Telefone/Whatsapp</b>:
                         @php
-                            $mask = '(##) #####-####';
+                        $mask = '(##) #####-####';
                         @endphp
                         {{ mask($mask, $inscrito->telefone) }}
                     </p>
@@ -60,12 +63,12 @@
                 </div>
                 <div class="col d-flex justify-content-end">
                     @if($inscrito->status !== "Aprovado")
-                        <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
-                        <a href="{{ route('inscritos.rejeitar', $inscrito->id) }}" class="btn btn-danger mx-2">Rejeitar</a>
+                    <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
+                    <a href="{{ route('inscritos.rejeitar', $inscrito->id) }}" class="btn btn-danger mx-2">Rejeitar</a>
                     @endif
                     @if(!$inscrito->mensagem_enviada)
-                        <a href="{{$mensagem}}" class="btn btn-success" target="_blank">Enviar Mensagem</a>
-                        <a href="{{ route('inscritos.confirmar', $inscrito->id) }}" class="btn btn-info mx-2">Confirmar Envio</a>
+                    <a href="{{$mensagem}}" class="btn btn-success" target="_blank">Enviar Mensagem</a>
+                    <a href="{{ route('inscritos.confirmar', $inscrito->id) }}" class="btn btn-info mx-2">Confirmar Envio</a>
                     @endif
                 </div>
             </div>
