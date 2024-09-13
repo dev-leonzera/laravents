@@ -9,9 +9,7 @@ use App\Models\TipoInscricao;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InscritosExport;
-use App\Mail\ConfirmarInscricao;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
 
 class InscritoController extends Controller
 {
@@ -60,7 +58,6 @@ class InscritoController extends Controller
                 'idade' => 'required|integer',
                 'camisa_tipo' => 'required',
                 'camisa_tamanho' => 'required',
-
             ]);
 
             $inscrito = Inscrito::criarInscricao($validatedData);
@@ -101,8 +98,42 @@ class InscritoController extends Controller
     public function export(Request $request, $evento_id)
     {
         $filters = $request->only(['status', 'tipo_inscricao']);
-        $timestamp = Carbon::now()->format('YmdHis'); 
-        $filename = "inscritos_{$timestamp}.xlsx"; 
+        $timestamp = Carbon::now()->format('YmdHis');
+        $filename = "inscritos_{$timestamp}.xlsx";
         return Excel::download(new InscritosExport($evento_id, $filters), $filename);
+    }
+
+    public function showInscricao($id){
+        $inscrito = Inscrito::find($id);
+        $mensagem = $this->generateWhatsappUrl($id);
+        return view('eventos.show-inscricao', compact('inscrito', 'mensagem'));
+    }
+
+    public function generateWhatsappUrl($id)
+    {
+        $inscrito = Inscrito::findOrFail($id);
+        $phone = str_replace(" ", "", $inscrito->telefone);
+        $paymentLink = $inscrito->link_pagamento;
+        $message = "
+Olá, amado(a)! A paz do Senhor!
+Estamos felizes com a sua inscrição na Escola Bíblica de Jovens 2024 com o tema Criados para a eternidade. 🙏🏻🎉
+Para confirmarmos a sua participação, estamos enviando o link de pagamento para o evento: 
+$paymentLink
+O pagamento pode ser realizado por pix ou cartão de crédito.
+        ";
+        $whatsappUrl = "https://api.whatsapp.com/send/?phone=55$phone&text=" . urlencode($message) . "&type=phone_number&app_absent=0";
+        return $whatsappUrl;
+    }
+
+    public function storePaymentLink(Request $request, Inscrito $inscrito)
+    {
+        $this->validate($request, [
+            'link_pagamento' => 'required|string',
+        ]);
+        $inscrito = Inscrito::findOrFail($request['inscrito_id']);
+        $inscrito->link_pagamento = $request->input('link_pagamento');
+        $inscrito->update();
+
+        return redirect()->back()->with('success', 'Link de pagamento salvo com sucesso!');
     }
 }

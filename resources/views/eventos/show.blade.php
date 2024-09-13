@@ -109,10 +109,7 @@
                                         {{ $inscrito->camisa_tamanho }}
                                     </td>
                                     <td>
-                                        @if($inscrito->status !== "Aprovado")
-                                            <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
-                                            <a href="{{ route('inscritos.rejeitar', $inscrito->id) }}" class="btn btn-danger">Rejeitar</a>
-                                        @endif
+                                        <a href="{{ route('inscritos.visualizar', $inscrito->id)}}" class="btn btn-success">Visualizar Inscrição</a>
                                     </td>
                                 </tr>
                             @endif
