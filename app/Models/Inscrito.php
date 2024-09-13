@@ -46,6 +46,10 @@ class Inscrito extends Model
         });
     }
 
+    public function confirmar(){
+        $this->update(['mensagem_enviada' => 1]);
+    }
+
     public function evento()
     {
         return $this->belongsTo(Evento::class);

@@ -136,4 +136,14 @@ O pagamento pode ser realizado por pix ou cartão de crédito.
 
         return redirect()->back()->with('success', 'Link de pagamento salvo com sucesso!');
     }
+
+    public function sendConfirm($id){
+        try {
+            $inscrito = Inscrito::findOrFail($id);
+            $inscrito->confirmar();
+            return redirect()->back()->with('success', 'Envio de mensagem confirmado com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao confirmar envio: ' . $e->getMessage());
+        }        
+    }
 }

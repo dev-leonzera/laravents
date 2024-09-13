@@ -63,8 +63,10 @@
                         <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
                         <a href="{{ route('inscritos.rejeitar', $inscrito->id) }}" class="btn btn-danger mx-2">Rejeitar</a>
                     @endif
-                    
-                    <a href="{{$mensagem}}" class="btn btn-success" target="_blank">Enviar Mensagem</a>
+                    @if(!$inscrito->mensagem_enviada)
+                        <a href="{{$mensagem}}" class="btn btn-success" target="_blank">Enviar Mensagem</a>
+                        <a href="{{ route('inscritos.confirmar', $inscrito->id) }}" class="btn btn-info mx-2">Confirmar Envio</a>
+                    @endif
                 </div>
             </div>
         </div>

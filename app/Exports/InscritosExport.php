@@ -79,8 +79,8 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
                     Carbon::parse($inscrito->created_at)->format('d/m/Y'),
                     $inscrito->congregacao,
                     $inscrito->status,
-                    "",
-                    ""
+                    $inscrito->link_pagamento,
+                    $inscrito->mensagem_enviada ? "Sim" : "Não"
                 ];
             });
     }

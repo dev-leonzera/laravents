@@ -46,4 +46,5 @@ Route::middleware('auth')->group(function () {
     Route::get('inscritos/rejeitar/{inscrito_id}', [InscritoController::class, 'rejectRegistration'])->name('inscritos.rejeitar');
     Route::get('inscritos/visualizar/{inscrito_id}', [InscritoController::class, 'showInscricao'])->name('inscritos.visualizar');
     Route::patch('inscritos/inserir-link-pagamento', [InscritoController::class, 'storePaymentLink'])->name('inscritos.pagamento');
+    Route::get('inscritos/confirmar-envio/{inscrito_id}', [InscritoController::class, 'sendConfirm'])->name('inscritos.confirmar');
 });
