@@ -58,6 +58,10 @@ class EventosController extends Controller
             });
         }
 
+        if($request->has('mensagem_enviada') && $request->mensagem_enviada != '') {
+            $query->where('mensagem_enviada', $request->mensagem_enviada);
+        }
+
         $inscritos = $query->get();
 
         return view('eventos.show', compact('evento', 'inscritos', 'tiposInscricao'));

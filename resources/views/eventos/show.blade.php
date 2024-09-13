@@ -60,6 +60,13 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
+                                <select name="mensagem_enviada" class="form-control">
+                                    <option value="">Mensagem Enviada</option>
+                                    <option value="1" {{ request('mensagem_enviada') == "1" ? 'selected' : ''}} >Sim</option>
+                                    <option value="0" {{ request('mensagem_enviada') == "0" ? 'selected' : ''}} >Não</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
                                 <button type="submit" class="btn btn-primary">Filtrar</button>
                                 <a href="{{ route('inscritos.export', ['evento_id' => $evento->id] + request()->all()) }}" class="btn btn-success">Exportar</a>
                             </div>
@@ -75,6 +82,7 @@
                             <th>Status Inscrição</th>
                             <th>Tipo Camisa</th>
                             <th>Tamanho Camisa</th>
+                            <th>Mensagem Enviada</th>
                             <th>Ações</th>
                         </thead>
                         <tbody>
@@ -107,6 +115,9 @@
                                     </td>
                                     <td>
                                         {{ $inscrito->camisa_tamanho }}
+                                    </td>
+                                    <td>
+                                        {{ $inscrito->mensagem_enviada ? "Sim" : "Não" }}
                                     </td>
                                     <td>
                                         <a href="{{ route('inscritos.visualizar', $inscrito->id)}}" class="btn btn-success">Visualizar Inscrição</a>
