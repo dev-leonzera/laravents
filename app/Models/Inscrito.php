@@ -10,7 +10,21 @@ class Inscrito extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'email', 'telefone', 'idade', 'evento_id', 'tipos_inscricao_id', 'status', 'congregacao', 'camisa_tipo', 'camisa_tamanho', 'link_pagamento', 'mensagem_enviada'];
+    protected $fillable = [
+        'nome', 
+        'email', 
+        'telefone', 
+        'idade', 
+        'evento_id', 
+        'tipos_inscricao_id', 
+        'status', 
+        'congregacao', 
+        'camisa_tipo', 
+        'camisa_tamanho', 
+        'link_pagamento', 
+        'mensagem_enviada',
+        'forma_pagamento'
+    ];
 
     public static function criarInscricao(array $dados)
     {
@@ -22,7 +36,12 @@ class Inscrito extends Model
                 throw new \Exception('Não há mais vagas disponíveis para este tipo de inscrição.');
             }
 
-            $inscrito = self::create(array_merge($dados, ['status' => 'pendente']));
+            $inscrito = self::create(array_merge($dados, [
+                'status' => 'pendente',
+                'link_pagamento' => null,
+                'mensagem_enviada' => null,
+                'forma_pagamento' => null
+            ]));
             $tipoInscricao->decrementarVagas();
 
             DB::commit();

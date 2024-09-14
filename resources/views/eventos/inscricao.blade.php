@@ -71,6 +71,17 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="mb-3">
+                <label class="form-label">{{ __('Forma de Pagamento') }}</label>
+                <select name="forma_pagamento" class="form-select @error('forma_pagamento') is-invalid @enderror" required>
+                    <option value="">Selecione a forma de pagamento</option>
+                    <option value="Cartão de Crédito">Cartão de Crédito</option>
+                    <option value="Pix">Pix</option>
+                </select>
+                @error('forma_pagamento')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
 
             <div class="form-footer d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary">{{ __('Enviar inscrição') }}</button>
