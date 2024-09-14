@@ -36,11 +36,17 @@ class Inscrito extends Model
                 throw new \Exception('Não há mais vagas disponíveis para este tipo de inscrição.');
             }
 
+            $allowedFormaPagamentoValues = ['Cartão de Crédito', 'Pix']; // list of allowed enum values
+
+            if (!in_array($dados['forma_pagamento'], $allowedFormaPagamentoValues)) {
+                throw new \Exception('Invalid forma_pagamento value');
+            }
+
             $inscrito = self::create(array_merge($dados, [
                 'status' => 'pendente',
                 'link_pagamento' => null,
-                'mensagem_enviada' => null,
-                'forma_pagamento' => null
+                'mensagem_enviada' => 0,
+                'forma_pagamento' => $dados['forma_pagamento']
             ]));
             $tipoInscricao->decrementarVagas();
 
