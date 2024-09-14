@@ -36,9 +36,9 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
             'Telefone',
             'Data de Inscrição',
             'Congregação',
-            'Status',
             'Tipo da Camisa',
             'Tamanho da Camisa',
+            'Status',
             'Link de pagamento',
             'Link enviado'
         ];
