@@ -37,6 +37,8 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
             'Data de Inscrição',
             'Congregação',
             'Status',
+            'Tipo da Camisa',
+            'Tamanho da Camisa',
             'Link de pagamento',
             'Link enviado'
         ];
@@ -55,7 +57,6 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
         $query = Inscrito::with('tipoInscricao')
             ->where('evento_id', $this->evento_id);
 
-        // Aplicar filtros
         if (isset($this->filters['status'])) {
             $query->where('status', $this->filters['status']);
         }
@@ -78,6 +79,8 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
                     $inscrito->telefone,
                     Carbon::parse($inscrito->created_at)->format('d/m/Y'),
                     $inscrito->congregacao,
+                    $inscrito->camisa_tipo,
+                    $inscrito->camisa_tamanho,
                     $inscrito->status,
                     $inscrito->link_pagamento,
                     $inscrito->mensagem_enviada ? "Sim" : "Não"
