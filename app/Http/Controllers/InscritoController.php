@@ -69,7 +69,7 @@ class InscritoController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Ocorreu um erro ao processar sua inscrição!')
+                ->with('error', 'Ocorreu um erro ao processar sua inscrição: ' . $e->getMessage())
                 ->withInput();
         }
     }
