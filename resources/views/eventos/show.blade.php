@@ -77,7 +77,7 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Idade</th>
-                            <th>Telefone</th>
+                            <th>Forma de Pagamento</th>
                             <th>Tipo de Inscrição</th>
                             <th>Status Inscrição</th>
                             <th>Mensagem Enviada</th>
@@ -97,10 +97,7 @@
                                         {{ $inscrito->idade }}
                                     </td>
                                     <td>
-                                        @php
-                                            $mask = '(##) #####-####';
-                                        @endphp
-                                        {{ mask($mask, $inscrito->telefone) }}
+                                        {{$inscrito->forma_pagamento}}
                                     </td>
                                     <td>
                                         {{ $inscrito->tipoInscricao->nome }}
