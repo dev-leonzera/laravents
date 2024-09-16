@@ -20,7 +20,7 @@
                     <p>
                         <b>Telefone/Whatsapp</b>:
                         @php
-                        $mask = '(##) #####-####';
+                            $mask = '(##) #####-####';
                         @endphp
                         {{ mask($mask, $inscrito->telefone) }}
                     </p>
@@ -45,6 +45,9 @@
                     </p>
                     <p>
                         <b>Tamanho da Camisa</b>: {{ $inscrito->camisa_tamanho }}
+                    </p>
+                    <p>
+                        <b>Forma de Pagamento</b>: {{ $inscrito->forma_pagamento }}
                     </p>
                     @if($inscrito->link_pagamento !== "")
                         <p>
