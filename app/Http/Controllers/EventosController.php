@@ -45,6 +45,7 @@ class EventosController extends Controller
     {
         $evento = Evento::findOrFail($id);
         $tiposInscricao = TipoInscricao::all();
+        $somaValoresTiposInscricao = Inscrito::somaValoresTiposInscricao();
 
         $query = Inscrito::where('evento_id', $id);
 
@@ -64,7 +65,7 @@ class EventosController extends Controller
 
         $inscritos = $query->get();
 
-        return view('eventos.show', compact('evento', 'inscritos', 'tiposInscricao'));
+        return view('eventos.show', compact('evento', 'inscritos', 'tiposInscricao', 'somaValoresTiposInscricao'));
     }
 
     /**

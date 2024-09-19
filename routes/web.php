@@ -8,6 +8,7 @@ use App\Http\Controllers\InscritoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TipoInscricaoController;
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::get('inscritos/visualizar/{inscrito_id}', [InscritoController::class, 'showInscricao'])->name('inscritos.visualizar');
     Route::patch('inscritos/inserir-link-pagamento', [InscritoController::class, 'storePaymentLink'])->name('inscritos.pagamento');
     Route::get('inscritos/confirmar-envio/{inscrito_id}', [InscritoController::class, 'sendConfirm'])->name('inscritos.confirmar');
+    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+
 });

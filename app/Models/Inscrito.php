@@ -11,17 +11,17 @@ class Inscrito extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome', 
-        'email', 
-        'telefone', 
-        'idade', 
-        'evento_id', 
-        'tipos_inscricao_id', 
-        'status', 
-        'congregacao', 
-        'camisa_tipo', 
-        'camisa_tamanho', 
-        'link_pagamento', 
+        'nome',
+        'email',
+        'telefone',
+        'idade',
+        'evento_id',
+        'tipos_inscricao_id',
+        'status',
+        'congregacao',
+        'camisa_tipo',
+        'camisa_tamanho',
+        'link_pagamento',
         'mensagem_enviada',
         'forma_pagamento'
     ];
@@ -71,7 +71,8 @@ class Inscrito extends Model
         });
     }
 
-    public function confirmar(){
+    public function confirmar()
+    {
         $this->update(['mensagem_enviada' => 1]);
     }
 
@@ -83,5 +84,12 @@ class Inscrito extends Model
     public function tipoInscricao()
     {
         return $this->belongsTo(TipoInscricao::class, 'tipos_inscricao_id');
+    }
+
+    public static function somaValoresTiposInscricao()
+    {
+        return self::join('tipos_inscricao', 'inscritos.tipos_inscricao_id', '=', 'tipos_inscricao.id')
+            ->where('inscritos.status', '=', 'aprovado')
+            ->sum('tipos_inscricao.valor');
     }
 }

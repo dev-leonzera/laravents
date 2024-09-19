@@ -9,7 +9,13 @@ class Evento extends Model
 {
     protected $fillable = ['title', 'description', 'data_inicio', 'data_fim', 'local', 'banner', 'slug'];
 
-    public function inscrito(){
+    public function inscrito()
+    {
         return $this->hasMany(Inscrito::class);
+    }
+
+    public function countInscritos()
+    {
+        return $this->inscrito()->count();
     }
 }
