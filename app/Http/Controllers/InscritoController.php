@@ -118,7 +118,7 @@ class InscritoController extends Controller
         $phone = str_replace(" ", "", $inscrito->telefone);
         $paymentLink = $inscrito->link_pagamento;
 
-        $message = view('whatsapp_message', compact('paymentLink'))->render();
+        $message = view('eventos.whatsapp_message', compact('paymentLink'))->render();
 
         $encodedMessage = urlencode($message);
 
