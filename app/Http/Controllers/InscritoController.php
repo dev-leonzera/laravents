@@ -117,12 +117,14 @@ class InscritoController extends Controller
         $phone = str_replace(" ", "", $inscrito->telefone);
         $paymentLink = $inscrito->link_pagamento;
         $message = "
+
 Olá, amado(a)! A paz do Senhor!
 Estamos felizes com a sua inscrição na Escola Bíblica de Jovens 2024 com o tema Criados para a eternidade. 🙏🏻🎉
 Para confirmarmos a sua participação, estamos enviando o link de pagamento para o evento: 
-$paymentLink
+
 O pagamento pode ser realizado por pix ou cartão de crédito.
-        ";
+
+$paymentLink ";
         $whatsappUrl = "https://api.whatsapp.com/send/?phone=55$phone&text=" . urlencode($message) . "&type=phone_number&app_absent=0";
         return $whatsappUrl;
     }
