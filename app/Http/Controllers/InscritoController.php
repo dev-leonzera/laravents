@@ -104,8 +104,7 @@ class InscritoController extends Controller
         return Excel::download(new InscritosExport($evento_id, $filters), $filename);
     }
 
-    public function showInscricao($id)
-    {
+    public function showInscricao($id){
         $inscrito = Inscrito::find($id);
         $evento = $inscrito->evento;
         $mensagem = $this->generateWhatsappUrl($id);
@@ -117,12 +116,14 @@ class InscritoController extends Controller
         $inscrito = Inscrito::findOrFail($id);
         $phone = str_replace(" ", "", $inscrito->telefone);
         $paymentLink = $inscrito->link_pagamento;
-
-        $message = view('eventos.whatsapp_message', compact('paymentLink'))->render();
-
-        $encodedMessage = urlencode($message);
-
-        $whatsappUrl = "https://api.whatsapp.com/send/?phone=55$phone&text=$encodedMessage&type=phone_number&app_absent=0";
+        $message = "
+Olá, amado(a)! A paz do Senhor!
+Estamos felizes com a sua inscrição na Escola Bíblica de Jovens 2024 com o tema Criados para a eternidade. 🙏🏻🎉
+Para confirmarmos a sua participação, estamos enviando o link de pagamento para o evento: 
+$paymentLink
+O pagamento pode ser realizado por pix ou cartão de crédito.
+        ";
+        $whatsappUrl = "https://api.whatsapp.com/send/?phone=55$phone&text=" . urlencode($message) . "&type=phone_number&app_absent=0";
         return $whatsappUrl;
     }
 
@@ -138,14 +139,13 @@ class InscritoController extends Controller
         return redirect()->back()->with('success', 'Link de pagamento salvo com sucesso!');
     }
 
-    public function sendConfirm($id)
-    {
+    public function sendConfirm($id){
         try {
             $inscrito = Inscrito::findOrFail($id);
             $inscrito->confirmar();
             return redirect()->back()->with('success', 'Envio de mensagem confirmado com sucesso!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Erro ao confirmar envio: ' . $e->getMessage());
-        }
+        }        
     }
 }
