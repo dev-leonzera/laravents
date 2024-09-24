@@ -54,11 +54,16 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
 
     public function collection()
     {
+
         $query = Inscrito::with('tipoInscricao')
             ->where('evento_id', $this->evento_id);
 
         if (isset($this->filters['status'])) {
             $query->where('status', $this->filters['status']);
+        }
+        
+        if (isset($this->filters['congregacao'])) {
+            $query->where('congregacao', $this->filters['congregacao']);
         }
 
         if (isset($this->filters['tipo_inscricao'])) {
@@ -66,12 +71,7 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
                 $q->where('nome', $this->filters['tipo_inscricao']);
             });
         }
-
-        if (isset($this->filters['congregacao'])){
-            $query->where('congregacao', $this->filters['congregacao']);
-        }
-
-        // Adicione mais filtros conforme necessário
+        
 
         return $query->get()
             ->map(function ($inscrito) {

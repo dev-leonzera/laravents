@@ -49,7 +49,7 @@ class EventosController extends Controller
 
         $congregacoes = Inscrito::where('evento_id', $id)
             ->select('congregacao')
-            ->groupBy('congregacao')
+            ->distinct()
             ->get()
             ->pluck('congregacao');
 
