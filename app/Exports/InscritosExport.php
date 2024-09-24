@@ -67,6 +67,10 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
             });
         }
 
+        if (isset($this->filters['congregacao'])){
+            $query->where('congregacao', $this->filters['congregacao']);
+        }
+
         // Adicione mais filtros conforme necessário
 
         return $query->get()
