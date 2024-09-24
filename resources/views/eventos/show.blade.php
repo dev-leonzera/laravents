@@ -61,7 +61,7 @@
                     <h2>Lista de Inscritos</h2>
                     <form action="{{ route('eventos.show', $evento->id) }}" method="GET" class="mb-3">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <select name="status" class="form-control">
                                     <option value="">Todos os status</option>
                                     <option value="Aprovado" {{ request('status') == 'Aprovado' ? 'selected' : '' }}>Aprovado</option>
@@ -69,7 +69,7 @@
                                     <option value="Pendente" {{ request('status') == 'Pendente' ? 'selected' : '' }}>Pendente</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <select name="tipo_inscricao" class="form-control">
                                     <option value="">Todos os tipos</option>
                                     @foreach($tiposInscricao as $tipo)
@@ -77,7 +77,15 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
+                                <select name="congregacao" class="form-control">
+                                    <option value="">Todos</option>
+                                    @foreach($congregacoes as $congregacao)
+                                        <option value="{{ $congregacao }}" {{ request('congregacao') == $congregacao ? 'selected' : '' }}>{{ $congregacao }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-2">
                                 <select name="mensagem_enviada" class="form-control">
                                     <option value="">Mensagem Enviada</option>
                                     <option value="1" {{ request('mensagem_enviada') == "1" ? 'selected' : ''}}>Sim</option>

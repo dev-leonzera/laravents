@@ -47,6 +47,12 @@ class EventosController extends Controller
         $tiposInscricao = TipoInscricao::all();
         $somaValoresTiposInscricao = Inscrito::somaValoresTiposInscricao();
 
+        $congregacoes = Inscrito::where('evento_id', $id)
+            ->select('congregacao')
+            ->groupBy('congregacao')
+            ->get()
+            ->pluck('congregacao');
+
         $query = Inscrito::where('evento_id', $id);
 
         if ($request->has('status') && $request->status != '') {
@@ -59,13 +65,17 @@ class EventosController extends Controller
             });
         }
 
-        if($request->has('mensagem_enviada') && $request->mensagem_enviada != '') {
+        if ($request->has('mensagem_enviada') && $request->mensagem_enviada != '') {
             $query->where('mensagem_enviada', $request->mensagem_enviada);
+        }
+
+        if ($request->has('congregacao') && $request->congregacao != '') {
+            $query->where('congregacao', $request->congregacao);
         }
 
         $inscritos = $query->get();
 
-        return view('eventos.show', compact('evento', 'inscritos', 'tiposInscricao', 'somaValoresTiposInscricao'));
+        return view('eventos.show', compact('evento', 'inscritos', 'tiposInscricao', 'somaValoresTiposInscricao', 'congregacoes'));
     }
 
     /**
