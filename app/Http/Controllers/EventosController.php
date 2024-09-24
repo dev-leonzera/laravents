@@ -48,9 +48,8 @@ class EventosController extends Controller
         $somaValoresTiposInscricao = Inscrito::somaValoresTiposInscricao();
 
         $congregacoes = Inscrito::where('evento_id', $id)
-            ->select('congregacao')
-            ->distinct()
-            ->get()
+            ->whereNotNull('congregacao')
+            ->distinct('congregacao')
             ->pluck('congregacao');
 
         $query = Inscrito::where('evento_id', $id);
