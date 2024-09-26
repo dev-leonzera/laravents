@@ -27,11 +27,28 @@
                         <a href="#" class="btn btn-primary">Exportar</a>
                     </div>
                 </div>
-                <div class="row py-5">
-                    <div class="col d-flex justify-content-between align-items-center border p-3">
+                <div class="row py-5 d-flex align-items-center border">
+                    <div class="col">
                         <span>Camisas</span>
-                        <a href="#" class="btn btn-primary">Exportar</a>
                     </div>
+                    <form id="report-form" action="{{ url('reports/camisas') }}" method="GET">
+                        <div class="col d-flex justify-content-end gap-5">
+                            <select class="form-control" id="evento" name="evento_id">
+                                <option value="">Selecione o evento</option>
+                                @foreach($eventos as $evento)
+                                    <option value="{{ $evento->id }}">{{ $evento->title }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-primary">Exportar</button>
+                        </div>
+                    </form>
+                    <script>
+                        document.getElementById('evento').addEventListener('change', function() {
+                            const eventId = this.value;
+                            const form = document.getElementById('report-form');
+                            form.action = `{{ route('reports.camisas', '') }}/${eventId}`;
+                        });
+                    </script>
                 </div>
                 <div class="row py-5">
                     <div class="col d-flex justify-content-between align-items-center border p-3">

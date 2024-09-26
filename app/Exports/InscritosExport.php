@@ -22,9 +22,9 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
     }
 
     /**
-    * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection
     
-    */
+     */
 
     public function headings(): array
     {
@@ -47,21 +47,19 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
     public function styles(Worksheet $sheet)
     {
         return [
-            
             1    => ['font' => ['bold' => true]]
         ];
     }
 
     public function collection()
     {
-
         $query = Inscrito::with('tipoInscricao')
             ->where('evento_id', $this->evento_id);
 
         if (isset($this->filters['status'])) {
             $query->where('status', $this->filters['status']);
         }
-        
+
         if (isset($this->filters['congregacao'])) {
             $query->where('congregacao', $this->filters['congregacao']);
         }
@@ -71,9 +69,10 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
                 $q->where('nome', $this->filters['tipo_inscricao']);
             });
         }
-        
 
-        return $query->get()
+
+        return $query->distinct()
+            ->get()
             ->map(function ($inscrito) {
                 return [
                     $inscrito->nome,
@@ -91,6 +90,4 @@ class InscritosExport implements FromCollection, WithHeadings, ShouldAutoSize, W
                 ];
             });
     }
-
-    
 }

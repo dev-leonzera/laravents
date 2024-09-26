@@ -49,5 +49,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('inscritos/inserir-link-pagamento', [InscritoController::class, 'storePaymentLink'])->name('inscritos.pagamento');
     Route::get('inscritos/confirmar-envio/{inscrito_id}', [InscritoController::class, 'sendConfirm'])->name('inscritos.confirmar');
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
-
+    Route::get('reports/camisas/{eventoId?}', [ReportController::class, 'reportCamisas'])->name('reports.camisas');
 });
