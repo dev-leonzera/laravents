@@ -41,14 +41,9 @@ class ReportCamisasExport implements FromCollection, WithHeadings, ShouldAutoSiz
 
     public function collection()
     {
-        $query = Inscrito::where('evento_id', $this->evento_id);
-        return $query->get()
-            ->map(function ($inscrito) {
-                return [
-                    $inscrito->nome,
-                    $inscrito->camisa_tipo,
-                    $inscrito->camisa_tamanho,
-                ];
-            });
+        $query = Inscrito::where('evento_id', $this->evento_id)
+            ->select('nome', 'camisa_tipo', 'camisa_tamanho')
+            ->distinct();
+        return $query->get();
     }
 }
