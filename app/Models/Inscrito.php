@@ -89,6 +89,7 @@ class Inscrito extends Model
     public static function somaValoresTiposInscricao()
     {
         return self::join('tipos_inscricao', 'inscritos.tipos_inscricao_id', '=', 'tipos_inscricao.id')
+            ->distinct('inscritos.nome')
             ->where('inscritos.status', '=', 'aprovado')
             ->sum('tipos_inscricao.valor');
     }

@@ -39,14 +39,14 @@
                 </div>
                 <div class="row">
                     <h3>Números do Evento</h3>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <span>Total de Vendas</span>
                                 <h3>R$ {{number_format($somaValoresTiposInscricao, 2, ',', '.')}}</h3>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">

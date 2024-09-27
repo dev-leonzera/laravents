@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+
 
 class Evento extends Model
 {
@@ -16,6 +19,6 @@ class Evento extends Model
 
     public function countInscritos()
     {
-        return $this->inscrito()->count();
+        return count(DB::select("SELECT DISTINCT nome FROM inscritos WHERE evento_id = ?", [$this->id]));
     }
 }
