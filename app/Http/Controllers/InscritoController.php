@@ -115,7 +115,7 @@ class InscritoController extends Controller
     {
         $inscrito = Inscrito::findOrFail($id);
         $phone = str_replace(" ", "", $inscrito->telefone);
-        $paymentLink = $inscrito->link_pagamento;
+        // $paymentLink = $inscrito->link_pagamento;
         $message = "
 
 Olá, amado(a)! A paz do Senhor!
@@ -124,7 +124,7 @@ Para confirmarmos a sua participação, estamos enviando o link de pagamento par
 
 O pagamento pode ser realizado por pix ou cartão de crédito.
 
-$paymentLink ";
+Chave pix: 44.600.002/0001-97 ";
         $whatsappUrl = "https://api.whatsapp.com/send/?phone=55$phone&text=" . urlencode($message) . "&type=phone_number&app_absent=0";
         return $whatsappUrl;
     }
