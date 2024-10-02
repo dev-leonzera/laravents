@@ -72,9 +72,22 @@ class EventosController extends Controller
             $query->where('congregacao', $request->congregacao);
         }
 
+        if ($request->has('inscrito') && $request->inscrito != '') {
+            $query->where('nome', 'LIKE', '%' . $request->inscrito . '%');
+        }
+
         $inscritos = $query->get();
 
-        return view('eventos.show', compact('evento', 'inscritos', 'tiposInscricao', 'somaValoresTiposInscricao', 'congregacoes'));
+        return view(
+            'eventos.show',
+            compact(
+                'evento',
+                'inscritos',
+                'tiposInscricao',
+                'somaValoresTiposInscricao',
+                'congregacoes'
+            )
+        );
     }
 
     /**

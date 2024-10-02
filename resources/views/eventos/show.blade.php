@@ -62,6 +62,9 @@
                     <form action="{{ route('eventos.show', $evento->id) }}" method="GET" class="mb-3">
                         <div class="row">
                             <div class="col-md-2">
+                                <input type="text" name="inscrito" id="" class="form-control">
+                            </div>
+                            <div class="col-md-2">
                                 <select name="status" class="form-control">
                                     <option value="">Todos os status</option>
                                     <option value="Aprovado" {{ request('status') == 'Aprovado' ? 'selected' : '' }}>Aprovado</option>
@@ -92,7 +95,7 @@
                                     <option value="0" {{ request('mensagem_enviada') == "0" ? 'selected' : ''}}>Não</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button type="submit" class="btn btn-primary">Filtrar</button>
                                 <a href="{{ route('inscritos.export', ['evento_id' => $evento->id] + request()->all()) }}" class="btn btn-success">Exportar</a>
                             </div>
