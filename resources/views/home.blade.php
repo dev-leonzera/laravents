@@ -27,9 +27,9 @@
                 <div class="card card-sm">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <div class="subheader">Total de Inscritos</div>
+                            <div class="subheader"></div>
                         </div>
-                        <div class="h1 mb-3">{{ $inscritos }}</div>
+                        <div class="h1 mb-3"></div>
                     </div>
                 </div>
             </div>
@@ -41,10 +41,21 @@
                             <div class="subheader">Próximo Evento</div>
                         </div>
                         @if($proximoEvento)
-                        <a href="{{ route('eventos.show', $proximoEvento->id) }}">
-                            <h3>{{ $proximoEvento->title }}</h3>
-                        </a>
-                        <p class="mb-0">Data: {{ \Carbon\Carbon::parse($proximoEvento->data_inicio)->format('d/m/Y') }}</p>
+                        <div class="row">
+                            <a href="{{ route('eventos.show', $proximoEvento->id) }}">
+                                <h3>{{ $proximoEvento->title }}</h3>
+                            </a>
+                            <p class="mb-0">Data: {{ \Carbon\Carbon::parse($proximoEvento->data_inicio)->format('d/m/Y') }}</p>
+                        </div>
+                        <div class="row my-2">
+                            <div class="card">
+                                <div class="d-flex align-items-center">
+                                    <div class="subheader">Total de Inscritos</div>
+                                </div>
+                                <div class="h1 mb-3">{{ $inscritos }}</div>
+                            </div>
+                        </div>
+
                         @else
                         <p class="mb-0">Nenhum evento próximo.</p>
                         @endif

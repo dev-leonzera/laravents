@@ -26,10 +26,10 @@ class HomeController extends Controller
     public function index()
     {
         $eventos = Evento::count();
-        $inscritos = Inscrito::count();
         $proximoEvento = Evento::where('data_inicio', '>=', now())
-                               ->orderBy('data_inicio', 'asc')
-                               ->first();
+        ->select('id', 'title', 'data_inicio')
+        ->first();
+        $inscritos = $proximoEvento ? $proximoEvento->inscrito->count() : 0;
 
         return view('home', compact('eventos', 'inscritos', 'proximoEvento'));
     }
