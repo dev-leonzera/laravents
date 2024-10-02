@@ -62,7 +62,7 @@
                     <form action="{{ route('eventos.show', $evento->id) }}" method="GET" class="mb-3">
                         <div class="row">
                             <div class="col-md-2">
-                                <input type="text" name="inscrito" id="" class="form-control">
+                                <input type="text" name="inscrito" id="" class="form-control" placeholder="Nome do inscrito">
                             </div>
                             <div class="col-md-2">
                                 <select name="status" class="form-control">
