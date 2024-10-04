@@ -46,6 +46,12 @@
                     <p>
                         <b>Tamanho da Camisa</b>: {{ $inscrito->camisa_tamanho }}
                     </p>
+                    
+                </div>
+            </div>
+            <div class="row border mt-3 p-2">
+                <h3>Dados de pagamento</h3>
+                <div class="col d-flex flex-wrap justify-content-around">
                     <p>
                         <b>Forma de Pagamento</b>: {{ $inscrito->forma_pagamento }}
                     </p>
@@ -69,16 +75,16 @@
                         <button type="submit" class="btn btn-primary">Salvar</button>
                     </form>
                 </div>
-                <div class="col-md-6 col-sm-12 d-flex border p-2">
-                    @if($inscrito->status !== "Aprovado")
-                    <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
-                    <a href="{{ route('inscritos.rejeitar', $inscrito->id) }}" class="btn btn-danger mx-2">Rejeitar</a>
-                    @endif
-                    @if(!$inscrito->mensagem_enviada)
-                    <a href="{{$mensagem}}" class="btn btn-success" target="_blank">Enviar Mensagem</a>
-                    <a href="{{ route('inscritos.confirmar', $inscrito->id) }}" class="btn btn-info mx-2">Confirmar Envio</a>
-                    @endif
-                </div>
+                @if($inscrito->status != "Aprovado")
+                    <div class="col-md-6 col-sm-12 d-flex border p-2">
+                        <a href="{{ route('inscritos.aprovar', $inscrito->id) }}" class="btn btn-info">Aprovar</a>
+                        <a href="{{ route('inscritos.rejeitar', $inscrito->id) }}" class="btn btn-danger mx-2">Rejeitar</a>
+                        @if(!$inscrito->mensagem_enviada)
+                        <a href="{{$mensagem}}" class="btn btn-success" target="_blank">Enviar Mensagem</a>
+                        <a href="{{ route('inscritos.confirmar', $inscrito->id) }}" class="btn btn-info mx-2">Confirmar Envio</a>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
     </div>
