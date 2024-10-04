@@ -104,7 +104,7 @@
                     <table class="table">
                         <thead>
                             <th>Nome</th>
-                            <th>Email</th>
+                            <th>Congregação</th>
                             <th>Idade</th>
                             <th>Forma de Pagamento</th>
                             <th>Tipo de Inscrição</th>
@@ -120,7 +120,7 @@
                                     {{ $inscrito->nome }}
                                 </td>
                                 <td>
-                                    {{ $inscrito->email }}
+                                    {{ $inscrito->congregacao }}
                                 </td>
                                 <td>
                                     {{ $inscrito->idade }}
